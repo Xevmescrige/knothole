@@ -83,3 +83,10 @@ minetest.register_abm({
 		minetest.set_node(pos, {name="default:tree"})
 	end
 })
+
+minetest.register_craft({
+	output = 'default:wood 3',
+	recipe = {
+		{'knothole:default_tree_knothole'},
+	}
+})
