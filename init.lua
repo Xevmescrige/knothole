@@ -75,3 +75,10 @@ minetest.register_abm({
 		end
 })
 
+minetest.register_abm({
+	nodenames = {"knothole:default_tree_knothole"},
+	interval = 500,
+	chance = 20,
+	action = function(pos, node)
+		minetest.set_node(pos, {name="default:tree"})
+})
