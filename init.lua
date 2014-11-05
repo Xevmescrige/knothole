@@ -90,3 +90,39 @@ minetest.register_craft({
 		{'knothole:default_tree_knothole'},
 	}
 })
+
+minetest.register_node("knothole:nest", {
+	tiles = {
+		"nest_empty_top.png",
+		"nest_empty_top.png",
+		"nest_empty_side.png",
+		"nest_empty_side.png",
+		"nest_empty_side.png",
+		"nest_empty_side.png"
+	},
+	groups = {choppy=2,oddly_breakable_by_hand=2},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.1875, -0.375, 0.375, 0.0625, 0.375}, 
+			{-0.25, -0.3125, -0.25, 0.25, -0.1875, 0.25}, 
+			{-0.375, -0.1875, -0.25, -0.25, 0.1875, 0.375}, 
+			{-0.375, -0.1875, -0.375, 0.25, 0.1875, -0.25}, 
+			{0.25, -0.1875, -0.375, 0.375, 0.1875, 0.25},
+			{-0.25, -0.1875, 0.25, 0.375, 0.1875, 0.375}, 
+		}
+	}
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "knothole:nest",
+	wherein        = "default:leaves",
+	clust_scarcity = 24*12*24,
+	clust_num_ores = 1,
+	clust_size     = 1,
+	height_min     = 0,
+	height_max     = 50,
+})
