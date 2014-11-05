@@ -81,4 +81,5 @@ minetest.register_abm({
 	chance = 20,
 	action = function(pos, node)
 		minetest.set_node(pos, {name="default:tree"})
+	end
 })
