@@ -56,21 +56,26 @@ minetest.register_node("knothole:default_tree_knothole", {
 
 minetest.register_abm({
 	nodenames = {"default:tree"},
-	neighbors = {"default:tree"},
 	interval = 50,
 	chance = 20,
 	action = function(pos, node)
 		pos.y = pos.y-2
 		local name = minetest.get_node(pos).name
 		if name == "default:tree" then
-			if minetest.find_node_near(pos, 3, {"default:tree"}) == nil then
-				minetest.set_node(pos, {name="default:tree"})
+			if minetest.find_node_near(pos, 3, {"default:tree", "group:water"}) ~= nil then
+				minetest.set_node(pos, {name="knothole:default_tree_knothole"})
 			end
-			pos.y = pos.y
-			local height = 0
-			if minetest.get_node(pos).name == "default:tree" then
-					minetest.set_node(pos, {name="knothole:default_tree_knothole"})
-				end
+			end
+		end
+})
+
+minetest.register_abm({
+	nodenames = {"default:leaves"},
+	interval = 60,
+	chance = 20,
+	action = function(pos, node)
+			if minetest.find_node_near(pos, 3, {"knothole:default_tree_knothole"}) ~= nil then
+				minetest.set_node(pos, {name="knothole:nest"})
 			end
 		end
 })
@@ -116,13 +121,3 @@ minetest.register_node("knothole:nest", {
 	}
 })
 
-minetest.register_ore({
-	ore_type       = "scatter",
-	ore            = "knothole:nest",
-	wherein        = "default:leaves",
-	clust_scarcity = 24*12*24,
-	clust_num_ores = 1,
-	clust_size     = 1,
-	height_min     = 0,
-	height_max     = 50,
-})
