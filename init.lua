@@ -121,3 +121,44 @@ minetest.register_node("knothole:nest", {
 	}
 })
 
+dofile(minetest.get_modpath("knothole").."/api.lua")
+
+mobs:register_mob("knothole:bird", {
+	type = "animal",
+	hp_max = 2,
+	collisionbox = {-0.25*(0.5/0.7), -0.33*(0.5/0.7), -0.25*(0.5/0.7), 0.25*(0.5/0.7), 0.33*(0.5/0.7), 0.25*(0.5/0.7)},
+	visual = "cube",
+	visual_size = { x = 0.5, y = 0.5},
+	textures = {"bird_top.png", "bird_bot.png", "bird_side.png", "bird_side.png", "bird_front.png", "bird_back.png"},
+	makes_footstep_sound = false,
+	walk_velocity = 2,
+	armor = 100,
+	drops = {
+		{name = "knothole:meat_raw",
+		chance = 1,
+		min = 1,
+		max = 1,},
+		},
+	drawtype = "front",
+	water_damage = 0.5,
+	lava_damage = 1,
+	light_damage = 0,
+})
+	
+minetest.register_craftitem("knothole:bird", {
+	description = "bird",
+	inventory_image = "bird_front.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.above then
+			minetest.env:add_entity(pointed_thing.above, "knothole:bird")
+		end
+		return itemstack
+	end,
+})
+
+minetest.register_craftitem("knothole:egg", {
+	description = "egg",
+	inventory_image = "egg.png",
+	on_use = minetest.item_eat(1),
+})
+
